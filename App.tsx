@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'; // Importing React and useEffect together.
+import React, {useEffect} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -9,7 +9,7 @@ import {
   Platform,
 } from 'react-native';
 
-import WifiManager from 'react-native-wifi-reborn'; // Importing WifiManager.
+import WifiManager from 'react-native-wifi-reborn';
 
 const App: React.FC = () => {
   useEffect(() => {
@@ -53,7 +53,6 @@ const App: React.FC = () => {
         />
         <Text style={styles.text}>We will be together soon 😉</Text>
       </View>
-      {/* You could add the "Scan Wi-Fi Networks" title and functionality here, but we're already calling a function in useEffect. */}
     </SafeAreaView>
   );
 };
@@ -78,7 +77,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     padding: 50,
   },
-  // Additional styling for the Wi-Fi scanning functionality could go here.
 });
 
 export default App;
