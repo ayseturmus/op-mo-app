@@ -1,7 +1,49 @@
-import React from 'react';
-import {SafeAreaView, StyleSheet, Image, View, Text} from 'react-native';
+import React, {useEffect} from 'react';
+import {
+  SafeAreaView,
+  StyleSheet,
+  Image,
+  View,
+  Text,
+  PermissionsAndroid,
+  Platform,
+} from 'react-native';
+
+import WifiManager from 'react-native-wifi-reborn';
 
 const App: React.FC = () => {
+  useEffect(() => {
+    const scanWifiNetworks = async () => {
+      if (Platform.OS === 'android') {
+        const granted = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+          {
+            title: 'Location Access Permission',
+            message: 'Location access is required to scan for Wi-Fi networks',
+            buttonNeutral: 'Ask Me Later',
+            buttonNegative: 'Cancel',
+            buttonPositive: 'OK',
+          },
+        );
+        if (granted !== PermissionsAndroid.RESULTS.GRANTED) {
+          console.log(
+            'Location permission denied, cannot scan for Wi-Fi networks',
+          );
+          return;
+        }
+      }
+
+      try {
+        const networks = await WifiManager.loadWifiList();
+        console.log('Nearby Wi-Fi Networks:', networks);
+      } catch (error) {
+        console.log('Error scanning Wi-Fi networks:', error);
+      }
+    };
+
+    scanWifiNetworks();
+  }, []);
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.imageView}>
