@@ -1,81 +1,42 @@
-import React, {useEffect} from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  Image,
-  View,
-  Text,
-  PermissionsAndroid,
-  Platform,
-} from 'react-native';
-
-import WifiManager from 'react-native-wifi-reborn';
+// src/App.tsx
+import React from 'react';
+import store from './src/redux/store';
+import {SafeAreaView, StyleSheet} from 'react-native';
+import {PaperProvider} from 'react-native-paper';
+import {Provider as StoreProvider} from 'react-redux';
+import {ApolloProvider} from '@apollo/client';
+import client from './src/services/api/apollo';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import LoginScreen from './src/screens/LoginScreen';
 
 const App: React.FC = () => {
-  useEffect(() => {
-    const scanWifiNetworks = async () => {
-      if (Platform.OS === 'android') {
-        const granted = await PermissionsAndroid.request(
-          PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-          {
-            title: 'Location Access Permission',
-            message: 'Location access is required to scan for Wi-Fi networks',
-            buttonNeutral: 'Ask Me Later',
-            buttonNegative: 'Cancel',
-            buttonPositive: 'OK',
-          },
-        );
-        if (granted !== PermissionsAndroid.RESULTS.GRANTED) {
-          console.log(
-            'Location permission denied, cannot scan for Wi-Fi networks',
-          );
-          return;
-        }
-      }
-
-      try {
-        const networks = await WifiManager.loadWifiList();
-        console.log('Nearby Wi-Fi Networks:', networks);
-      } catch (error) {
-        console.log('Error scanning Wi-Fi networks:', error);
-      }
-    };
-
-    scanWifiNetworks();
-  }, []);
+  const Stack = createNativeStackNavigator();
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.imageView}>
-        <Image
-          source={require('./assets/images/octoposprime.png')}
-          style={styles.image}
-        />
-        <Text style={styles.text}>We will be together soon 😉</Text>
-      </View>
-    </SafeAreaView>
+    <NavigationContainer>
+      <StoreProvider store={store}>
+        <ApolloProvider client={client}>
+          <PaperProvider>
+            <SafeAreaView style={styles.container}>
+              <Stack.Navigator>
+                <Stack.Screen
+                  name="Login"
+                  component={LoginScreen}
+                  options={{headerShown: false}}
+                />
+              </Stack.Navigator>
+            </SafeAreaView>
+          </PaperProvider>
+        </ApolloProvider>
+      </StoreProvider>
+    </NavigationContainer>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  imageView: {
-    alignItems: 'center',
-    flex: 1,
-    justifyContent: 'center',
-  },
-  image: {
-    width: 200,
-    height: 200,
-  },
-  text: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    padding: 50,
   },
 });
 
