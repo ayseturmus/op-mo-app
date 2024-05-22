@@ -10,37 +10,35 @@ class WelcomeScreen extends StatelessWidget {
     const Color customPurple = Color(0xFF6151A7);
 
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Container(
         constraints: BoxConstraints(
             maxHeight: MediaQuery.of(context).size.height * 0.95),
         child: Column(
           children: [
             Expanded(
-              child: Container(
-                color: Colors.white, // Column arka plan rengi
-                child: PageView(
-                  controller: pageController,
-                  children: const [
-                    WelcomePage(
-                      imagePath: 'lib/presentation/assets/images/octopos1.png',
-                      title: "Welcome to OctoposPrime",
-                      description:
-                          'Master your skills with fun and learn\nfrom every fundamentals',
-                    ),
-                    WelcomePage(
-                      imagePath: 'lib/presentation/assets/images/octopos2.png',
-                      title: "Enhance Your Skills",
-                      description:
-                          'Gain new knowledge and skills with our comprehensive and interactive courses',
-                    ),
-                    WelcomePage(
-                      imagePath: 'lib/presentation/assets/images/octopos3.png',
-                      title: "Join Our Community",
-                      description:
-                          'Be part of a vibrant community of learners and experts. Share, collaborate, and grow together',
-                    ),
-                  ],
-                ),
+              child: PageView(
+                controller: pageController,
+                children: const [
+                  WelcomePage(
+                    imagePath: 'lib/presentation/assets/images/octopos1.png',
+                    title: "Welcome to OctoposPrime",
+                    description:
+                        'Master your skills with fun and learn\nfrom every fundamentals',
+                  ),
+                  WelcomePage(
+                    imagePath: 'lib/presentation/assets/images/octopos2.png',
+                    title: "Enhance Your Skills",
+                    description:
+                        'Gain new knowledge and skills with our comprehensive and interactive courses',
+                  ),
+                  WelcomePage(
+                    imagePath: 'lib/presentation/assets/images/octopos3.png',
+                    title: "Join Our Community",
+                    description:
+                        'Be part of a vibrant community of learners and experts. Share, collaborate, and grow together',
+                  ),
+                ],
               ),
             ),
             SmoothPageIndicator(
