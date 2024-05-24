@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:op_mo_app/presentation/screens/home/home_screen.dart';
 import 'package:op_mo_app/presentation/screens/login/login_screen.dart';
 import 'package:op_mo_app/presentation/screens/profile/profile_screen.dart';
-import 'package:op_mo_app/presentation/screens/signup/signup_screen.dart'; // Değiştirilen import yolu
+import 'package:op_mo_app/presentation/screens/signup/signup_screen.dart'; 
 import 'package:op_mo_app/presentation/screens/welcome/welcome_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -35,7 +35,7 @@ class AppNavigator extends StatelessWidget {
           routes: {
             '/': (context) => isAuthenticated ? HomeScreen() : const WelcomeScreen(),
             '/login': (context) => const LoginScreen(),
-            '/signup': (context) => SignUpScreen(), // Güncellenen rota ve ekran
+            '/signup': (context) => SignUpScreen(), 
             '/profile': (context) => const ProfileScreen(),
           },
         );
