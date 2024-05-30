@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
-class RegisterViewModel {
+class SignUpViewModel {
   final TextEditingController userNameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-  Future<void> register(BuildContext context) async {
-    // Register logic goes here
-    // On successful registration, navigate to home screen
+  // Signup logic goes here
+  // On successful registration, navigate to home screen
+  Future<void> signUp(BuildContext context) async {
+   
     Navigator.pushReplacementNamed(context, '/home');
   }
 }

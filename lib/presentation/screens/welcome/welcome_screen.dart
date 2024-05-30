@@ -79,7 +79,7 @@ class WelcomeScreen extends StatelessWidget {
                   const SizedBox(width: 10),
                   ElevatedButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, '/register');
+                      Navigator.pushNamed(context, '/signup');
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white,
